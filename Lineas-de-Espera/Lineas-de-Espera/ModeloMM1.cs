@@ -14,7 +14,10 @@ namespace Lineas_de_Espera
             this.tasaMediaTiempoLlegadaClientes = tasaMediaTiempoLlegadaClientes;
             this.tasaMediaTiempoServicio = tasaMediaTiempoServicio;
             setFactorUtilizacion();
-
+            setNumeroEsperadoClientesSistema(this.factorUtilizacion);
+            setNumeroEsperadoClientesFila(this.factorUtilizacion);
+            setTiempoEsperaEstimadoSistema(this.tasaMediaTiempoServicio, this.tasaMediaTiempoLlegadaClientes);
+            setTiempoEsperaEstimadoFila(this.tasaMediaTiempoLlegadaClientes, this.tasaMediaTiempoServicio);
         }
 
         public override void setNumeroEsperadoClientesSistema(float factorUtilizacion)
