@@ -33,25 +33,25 @@ namespace Lineas_de_Espera
         public float numeroEsperadoClientesSistema
         {
             get { return _numeroEsperadoClientesSistema; }
-            private set;
+            set;
         }
 
         public float numeroEsperadoClientesFila
         {
             get { return _numeroEsperadoClientesFila; }
-            private set;
+            set;
         }
 
         public float tiempoEsperaEstimadoSistema
         {
             get { return _tiempoEsperaEstimadoSistema; }
-            private set;
+            set;
         }
 
         public float tiempoEsperaEstimadoFila
         {
             get { return _tiempoEsperaEstimadoFila; }
-            private set;
+            set;
         }
 
         public float numeroServidores
@@ -59,17 +59,19 @@ namespace Lineas_de_Espera
             get { return _numeroServidores; }
             set { _numeroServidores = value; }
         }
+
         public float factorUtilizacion { get; private set; }
+
         public void setFactorUtilizacion()
         {
             _factorUtilizacion = calcularFactorUtilizacion(_tasaMediaTiempoLlegadaClientes, tasaMediaTiempoServicio);
         }
 
         #region Abstract Setters
-        public abstract void setNumeroEsperadoClientesSistema();
-        public abstract void setNumeroEsperadoClientesFila();
-        public abstract void setTiempoEsperaEstimadoSistema();
-        public abstract void setTiempoEsperaEstimadoFila();
+        public abstract void setNumeroEsperadoClientesSistema(float factorUtilizacion);
+        public abstract void setNumeroEsperadoClientesFila(float factorUtilizacion);
+        public abstract void setTiempoEsperaEstimadoSistema(float tasaMediaTiempoServicio, float tasaMediaTiempoLlegadaClientes);
+        public abstract void setTiempoEsperaEstimadoFila(float tasaMediaTiempoLlegadaClientes, float tasaMediaTiempoServicio);
         #endregion       
         
         #endregion
@@ -84,13 +86,6 @@ namespace Lineas_de_Espera
         {
             return lambda / mu;
         }
-        #endregion
-
-        #region Abstract Methods
-        abstract public float calcularNumeroEsperadoClientesSistema(float factorUtilizacion);
-        abstract public float calcularNumeroEsperadoClientesFila();
-        abstract public float calcularTiempoEsperaSistema();
-        abstract public float calcularTiempoEsperaFila();
         #endregion
 
     }
