@@ -14,9 +14,8 @@ namespace Lineas_de_Espera
             this.tasaMediaTiempoLlegadaClientes = tasaMediaTiempoLlegadaClientes;
             this.tasaMediaTiempoServicio = tasaMediaTiempoServicio;
             setFactorUtilizacion();
-
         }
-
+        //Numero esperado de clientes valor de L
         public override void setNumeroEsperadoClientesSistema(float factorUtilizacion)
         {
             float numeroEsperadoClientes;

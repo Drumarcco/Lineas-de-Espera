@@ -2,3 +2,7 @@ C:\Users\MarcoAntonio\Documents\Visual Studio 2013\Projects\Lineas-de-Espera\Lin
 C:\Users\MarcoAntonio\Documents\Visual Studio 2013\Projects\Lineas-de-Espera\Lineas-de-Espera\Lineas-de-Espera\obj\Debug\Lineas-de-Espera.csprojResolveAssemblyReference.cache
 C:\Users\MarcoAntonio\Documents\Visual Studio 2013\Projects\Lineas-de-Espera\Lineas-de-Espera\Lineas-de-Espera\obj\Debug\Lineas_de_Espera.Properties.Resources.resources
 C:\Users\MarcoAntonio\Documents\Visual Studio 2013\Projects\Lineas-de-Espera\Lineas-de-Espera\Lineas-de-Espera\obj\Debug\Lineas-de-Espera.csproj.GenerateResource.Cache
+C:\Users\JANN\Documents\GitHub\Lineas-de-Espera\Lineas-de-Espera\Lineas-de-Espera\bin\Debug\Lineas-de-Espera.exe.config
+C:\Users\JANN\Documents\GitHub\Lineas-de-Espera\Lineas-de-Espera\Lineas-de-Espera\obj\Debug\Lineas-de-Espera.csprojResolveAssemblyReference.cache
+C:\Users\JANN\Documents\GitHub\Lineas-de-Espera\Lineas-de-Espera\Lineas-de-Espera\obj\Debug\Lineas_de_Espera.Properties.Resources.resources
+C:\Users\JANN\Documents\GitHub\Lineas-de-Espera\Lineas-de-Espera\Lineas-de-Espera\obj\Debug\Lineas-de-Espera.csproj.GenerateResource.Cache
