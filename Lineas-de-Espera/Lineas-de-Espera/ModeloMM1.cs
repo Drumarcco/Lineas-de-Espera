@@ -10,6 +10,10 @@ namespace Lineas_de_Espera
     {
         public ModeloMM1(float tasaMediaTiempoLlegadaClientes, float tasaMediaTiempoServicio )
         {
+            if (tasaMediaTiempoLlegadaClientes >= tasaMediaTiempoServicio)
+            {
+                throw new ArgumentException("Lambda debe ser menor que Mu", "tasaMediaTiempoLlegadaClientes");
+            }
             this.numeroServidores = 1;
             this.tasaMediaTiempoLlegadaClientes = tasaMediaTiempoLlegadaClientes;
             this.tasaMediaTiempoServicio = tasaMediaTiempoServicio;
