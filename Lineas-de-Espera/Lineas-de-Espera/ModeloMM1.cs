@@ -17,33 +17,18 @@ namespace Lineas_de_Espera
 
         }
 
-        public override void setNumeroEsperadoClientesSistema(float factorUtilizacion)
+        public override void setNumeroEsperadoClientesSistema()
         {
-            float numeroEsperadoClientes;
-            numeroEsperadoClientes = factorUtilizacion / (1 - factorUtilizacion);
-            this.numeroEsperadoClientesSistema = numeroEsperadoClientes;
+            throw new NotImplementedException();
         }
 
-        public override void setNumeroEsperadoClientesFila(float factorUtilizacion)
+        public override float calcularNumeroEsperadoClientesSistema(float factorUtilizacion)
         {
-            float numeroEsperadoClientes;
-            numeroEsperadoClientes = (float) (Math.Pow(factorUtilizacion, 2) / (1 - factorUtilizacion));
-            this.numeroEsperadoClientesFila = numeroEsperadoClientes;
+            float numeroEsperadoClientesSistema;
+            numeroEsperadoClientesSistema = factorUtilizacion / (1 - factorUtilizacion);
+            return numeroEsperadoClientesSistema;
         }
 
-        public override void setTiempoEsperaEstimadoSistema(float tasaMediaTiempoServicio, float tasaMediaTiempoLlegadaClientes)
-        {
-            float tiempoEsperaEstimado;
-            tiempoEsperaEstimado = 1 / (tasaMediaTiempoServicio - tasaMediaTiempoLlegadaClientes);
-            this.tiempoEsperaEstimadoSistema = tiempoEsperaEstimado;
-        }
-
-        public override void setTiempoEsperaEstimadoFila(float tasaMediaTiempoLlegadaClientes, float tasaMediaTiempoServicio)
-        {
-            float tiempoEsperaEstimado;
-            tiempoEsperaEstimado = tasaMediaTiempoLlegadaClientes / (tasaMediaTiempoServicio * (tasaMediaTiempoServicio - tasaMediaTiempoLlegadaClientes));
-            this.tiempoEsperaEstimadoFila = tiempoEsperaEstimado;
-        }
 
     }
 }
