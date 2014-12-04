@@ -111,9 +111,7 @@ namespace Lineas_de_Espera
             return lambda / mu;
         }
 
-<<<<<<< HEAD
-        
-=======
+       
         private float calcularFactorUtilizacion(float lambda, float mu, float numeroServidores)
         {
             return lambda / (numeroServidores * mu);
@@ -215,7 +213,6 @@ namespace Lineas_de_Espera
             return numero * factorial(numero - 1);
         }
 
->>>>>>> origin/master
         #endregion
 
     }

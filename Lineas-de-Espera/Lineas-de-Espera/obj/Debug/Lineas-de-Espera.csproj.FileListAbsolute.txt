@@ -10,3 +10,5 @@ C:\Users\MarcoAntonio\Documents\Visual Studio 2013\Projects\Lineas-de-Espera\Lin
 C:\Users\MarcoAntonio\Documents\Visual Studio 2013\Projects\Lineas-de-Espera\Lineas-de-Espera\Lineas-de-Espera\obj\Debug\Lineas-de-Espera.exe
 C:\Users\MarcoAntonio\Documents\Visual Studio 2013\Projects\Lineas-de-Espera\Lineas-de-Espera\Lineas-de-Espera\obj\Debug\Lineas-de-Espera.pdb
 >>>>>>> origin/master
+C:\Users\MarioOsuna-\Documents\GitHub\Lineas-de-Espera\Lineas-de-Espera\Lineas-de-Espera\obj\Debug\Lineas-de-Espera.exe
+C:\Users\MarioOsuna-\Documents\GitHub\Lineas-de-Espera\Lineas-de-Espera\Lineas-de-Espera\obj\Debug\Lineas-de-Espera.pdb
