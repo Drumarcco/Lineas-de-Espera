@@ -31,13 +31,13 @@ namespace Lineas_de_Espera
             setTiempoEsperaEstimadoFila(this.numeroEsperadoClientesFila, this.tasaMediaTiempoLlegadaClientes);
         }
 
-        public override void setNumeroEsperadoClientesFila(float factorUtilizacion)
+        public override void setNumeroEsperadoClientesFila(float factorUtilizacion, float tasaMediaTiempoLlegadaClientes, float tasaMediaTiempoServicio, int numeroClientes, int numeroServidores)
         {
-            float probabilidadCero = this.probabilidadCeroClientesSistema(factorUtilizacion);
+            float probabilidadCero = this.calcularProbabilidadNClientesSistema(tasaMediaTiempoLlegadaClientes, tasaMediaTiempoServicio, numeroClientes, numeroServidores);
             int factorialServidores = this.factorial(numeroServidores);
 
-            float numeroClientesFila = (float) ( (probabilidadCero * Math.Pow(tasaMediaTiempoLlegadaClientes/tasaMediaTiempoServicio, numeroServidores) * factorUtilizacion) / 
-                (factorialServidores * Math.Pow(probabilidadCero, 2)) );
+            float numeroClientesFila = (float)((probabilidadCero * Math.Pow(tasaMediaTiempoLlegadaClientes / tasaMediaTiempoServicio, numeroServidores) * factorUtilizacion) /
+                (factorialServidores * Math.Pow(1 - factorUtilizacion, 2)));
 
             this.numeroEsperadoClientesFila = numeroClientesFila;
         }
