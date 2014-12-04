@@ -8,20 +8,21 @@ namespace Lineas_de_Espera
 {
     class ModeloMD1 : ModeloLineaDeEspera
     {
+        /// <summary>
+        /// Metodo constructor de Modelo MD1
+        /// </summary>
+        /// <param name="tasaMediaTiempoLlegadaClientes">Lambda</param>
+        /// <param name="tasaMediaTiempoServicio">Mu</param>
         public ModeloMD1(float tasaMediaTiempoLlegadaClientes, float tasaMediaTiempoServicio)
         {
             this.numeroServidores = 1;
             this.tasaMediaTiempoLlegadaClientes = tasaMediaTiempoLlegadaClientes;
             this.tasaMediaTiempoServicio = tasaMediaTiempoServicio;
             setFactorUtilizacion();
-            //setNumeroEsperadoClientesSistema(this.factorUtilizacion);
             setNumeroEsperadoClientesSistema(this.factorUtilizacion, this.numeroEsperadoClientesFila);
             setNumeroEsperadoClientesFila(this.factorUtilizacion);
-            //setTiempoEsperaEstimadoSistema(this.tasaMediaTiempoServicio, this.tasaMediaTiempoLlegadaClientes);
             setTiempoEsperaEstimadoSistema(this.factorUtilizacion, this.tiempoEsperaEstimadoFila);
-            //setTiempoEsperaEstimadoFila(this.tasaMediaTiempoLlegadaClientes, this.tasaMediaTiempoServicio);
             setTiempoEsperaEstimadoFila(this.tasaMediaTiempoLlegadaClientes, this.numeroEsperadoClientesFila);
-
 
         }
 

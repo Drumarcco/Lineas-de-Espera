@@ -86,10 +86,7 @@ namespace Lineas_de_Espera
             float tasaMediaTiempoServicio, int numeroClientes, int numeroServidores);
         public abstract void setTiempoEsperaEstimadoSistema(float tasaMediaTiempoServicio, float tasaMediaTiempoLlegadaClientes);
         public abstract void setTiempoEsperaEstimadoFila(float tasaMediaTiempoLlegadaClientes, float tasaMediaTiempoServicio);
-
         public abstract void setNumeroEsperadoClientesSistema(float factorUtilizacion, float numeroEsperadoClientesFila);
-        public abstract void setTiempoEsperaEstimadoSistema(double factorUtilizacion, float tiempoEsperaEstimadoFila);
-        public abstract void setTiempoEsperaEstimadoFila(double tasaMediaTiempoLlegadaClientes, float numeroEsperadoClientesFila);
 
         #endregion       
         
