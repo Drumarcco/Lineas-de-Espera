@@ -67,11 +67,17 @@ namespace Lineas_de_Espera
             _factorUtilizacion = calcularFactorUtilizacion(_tasaMediaTiempoLlegadaClientes, tasaMediaTiempoServicio);
         }
 
+
         #region Abstract Setters
         public abstract void setNumeroEsperadoClientesSistema(float factorUtilizacion);
         public abstract void setNumeroEsperadoClientesFila(float factorUtilizacion);
         public abstract void setTiempoEsperaEstimadoSistema(float tasaMediaTiempoServicio, float tasaMediaTiempoLlegadaClientes);
         public abstract void setTiempoEsperaEstimadoFila(float tasaMediaTiempoLlegadaClientes, float tasaMediaTiempoServicio);
+
+        public abstract void setNumeroEsperadoClientesSistema(float factorUtilizacion, float numeroEsperadoClientesFila);
+        public abstract void setTiempoEsperaEstimadoSistema(double factorUtilizacion, float tiempoEsperaEstimadoFila);
+        public abstract void setTiempoEsperaEstimadoFila(double tasaMediaTiempoLlegadaClientes, float numeroEsperadoClientesFila);
+
         #endregion       
         
         #endregion
@@ -86,6 +92,8 @@ namespace Lineas_de_Espera
         {
             return lambda / mu;
         }
+
+        
         #endregion
 
     }
