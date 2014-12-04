@@ -8,6 +8,11 @@ namespace Lineas_de_Espera
 {
     class ModeloMM1 : ModeloLineaDeEspera
     {
+        /// <summary>
+        /// Constructor de Modelo MM1 de Lineas de Espera.
+        /// </summary>
+        /// <param name="tasaMediaTiempoLlegadaClientes">Tasa media de llegada de clientes que ingresan al sistema "lambda"</param>
+        /// <param name="tasaMediaTiempoServicio">Tasa media de servicio por unidad de tiempo "mu"</param>
         public ModeloMM1(float tasaMediaTiempoLlegadaClientes, float tasaMediaTiempoServicio )
         {
             if (tasaMediaTiempoLlegadaClientes >= tasaMediaTiempoServicio)
@@ -22,7 +27,6 @@ namespace Lineas_de_Espera
             setNumeroEsperadoClientesFila(this.factorUtilizacion);
             setTiempoEsperaEstimadoSistema(this.tasaMediaTiempoServicio, this.tasaMediaTiempoLlegadaClientes);
             setTiempoEsperaEstimadoFila(this.tasaMediaTiempoLlegadaClientes, this.tasaMediaTiempoServicio);
-
         }
         //Numero esperado de clientes valor de L
         public override void setNumeroEsperadoClientesSistema(float factorUtilizacion)
