@@ -51,9 +51,7 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="ModeloLineaDeEspera.cs" />
-    <Compile Include="..\..\..\..\..\Desktop\ModeloMD1.cs">
-      <Link>ModeloMD1.cs</Link>
-    </Compile>
+    <Compile Include="ModeloMD1.cs" />
     <Compile Include="ModeloMM1.cs" />
     <Compile Include="ModeloMMS.cs" />
     <Compile Include="Program.cs" />

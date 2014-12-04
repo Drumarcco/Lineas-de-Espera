@@ -8,35 +8,35 @@ namespace Lineas_de_Espera
 {
     class ModeloMD1 : ModeloLineaDeEspera
     {
-        public ModeloMD1 (float tasaMediaTiempoLlegadaClientes, float tasaMediaTiempoServicio)
+        public ModeloMD1(float tasaMediaTiempoLlegadaClientes, float tasaMediaTiempoServicio)
         {
             this.numeroServidores = 1;
             this.tasaMediaTiempoLlegadaClientes = tasaMediaTiempoLlegadaClientes;
             this.tasaMediaTiempoServicio = tasaMediaTiempoServicio;
             setFactorUtilizacion();
             //setNumeroEsperadoClientesSistema(this.factorUtilizacion);
-            setNumeroEsperadoClientesSistema(this.factorUtilizacion, this.numeroEsperadoClientesFila);  
+            setNumeroEsperadoClientesSistema(this.factorUtilizacion, this.numeroEsperadoClientesFila);
             setNumeroEsperadoClientesFila(this.factorUtilizacion);
             //setTiempoEsperaEstimadoSistema(this.tasaMediaTiempoServicio, this.tasaMediaTiempoLlegadaClientes);
             setTiempoEsperaEstimadoSistema(this.factorUtilizacion, this.tiempoEsperaEstimadoFila);
             //setTiempoEsperaEstimadoFila(this.tasaMediaTiempoLlegadaClientes, this.tasaMediaTiempoServicio);
             setTiempoEsperaEstimadoFila(this.tasaMediaTiempoLlegadaClientes, this.numeroEsperadoClientesFila);
 
-        
+
         }
 
         public override void setNumeroEsperadoClientesSistema(float factorUtilizacion, float numeroEsperadoClientesFila)
         {
             float numeroEsperadoClientes;
-            numeroEsperadoClientes = factorUtilizacion  + numeroEsperadoClientesFila;
+            numeroEsperadoClientes = factorUtilizacion + numeroEsperadoClientesFila;
             this.numeroEsperadoClientesSistema = numeroEsperadoClientes;
         }
 
         public override void setNumeroEsperadoClientesFila(float factorUtilizacion)
         {
-        
+
             float numeroEsperadoClientes;
-            numeroEsperadoClientes = (float) (Math.Pow(factorUtilizacion, 2) / (2*(1 - factorUtilizacion)));
+            numeroEsperadoClientes = (float)(Math.Pow(factorUtilizacion, 2) / (2 * (1 - factorUtilizacion)));
             this.numeroEsperadoClientesFila = numeroEsperadoClientes;
         }
 
