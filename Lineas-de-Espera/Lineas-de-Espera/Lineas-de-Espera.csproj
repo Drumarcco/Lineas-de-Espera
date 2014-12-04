@@ -52,6 +52,7 @@
     </Compile>
     <Compile Include="ModeloLineaDeEspera.cs" />
     <Compile Include="ModeloMM1.cs" />
+    <Compile Include="ModeloMMS.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
