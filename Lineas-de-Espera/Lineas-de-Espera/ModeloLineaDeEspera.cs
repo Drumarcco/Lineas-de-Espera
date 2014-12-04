@@ -114,6 +114,20 @@ namespace Lineas_de_Espera
             return lambda / (numeroServidores * mu);
         }
 
+        public float calcularProbabilidadTiempoEsperaSistemaExcedente(float tasaMediaTiempoServicio, float factorUtilizacion, 
+            float tiempo)
+        {
+            float probabilidad =(float) Math.Exp(-tasaMediaTiempoServicio * (1 - factorUtilizacion) * tiempo);
+            return probabilidad;
+        }
+
+        public float calcularProbabilidadTiempoEsperaFilaExcedente(float factorUtilizacion, float tasaMediaTiempoServicio,
+            float tiempo)
+        {
+            float probabilidad = (float) (factorUtilizacion * Math.Exp(-tasaMediaTiempoServicio * (1 - factorUtilizacion) * tiempo));
+            return probabilidad;
+        }
+
         /// <summary>
         /// Calcula la probabilidad de que entren 0 o N numero de clientes al sistema de un servidor.
         /// </summary>
