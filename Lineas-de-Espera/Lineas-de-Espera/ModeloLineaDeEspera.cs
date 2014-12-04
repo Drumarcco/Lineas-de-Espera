@@ -86,6 +86,20 @@ namespace Lineas_de_Espera
         {
             return lambda / mu;
         }
+
+        public float probabilidadNClientesSistema(float factorUtilizacion, float n)
+        {
+            if (factorUtilizacion >= 1) throw new ArgumentException("Factor de utilizacion debe ser menor a 1.", "factorUtilizacion");
+            float probabilidad;
+            probabilidad = (float) ((1 - factorUtilizacion) * (Math.Pow(factorUtilizacion, n)));
+            return probabilidad;
+        }
+
+        public float probabilidadCeroClientesSistema(float factorUtilizacion)
+        {
+            if (factorUtilizacion >= 1) throw new ArgumentException("Factor de utilización debe ser menor a 1.", "factorUtilizacion");
+            return 1 - factorUtilizacion;
+        }
         #endregion
 
     }
