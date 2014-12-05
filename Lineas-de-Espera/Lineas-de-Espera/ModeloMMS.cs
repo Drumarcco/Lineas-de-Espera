@@ -16,24 +16,24 @@ namespace Lineas_de_Espera
         /// <param name="numeroServidores">Numero de servidores que atienden las filas.</param>
         public ModeloMMS(float tasaMediaTiempoLlegadaClientes, float tasaMediaTiempoServicio, int numeroServidores)
         {
-            if (tasaMediaTiempoLlegadaClientes >= tasaMediaTiempoServicio)
-                throw new ArgumentException("Lambda debe ser menor que mu para que sea un sistema estable", "tasaMediaTiempoLlegadaClientes");
             if (numeroServidores <= 1)
-                throw new ArgumentException("El nmero de servidores para este modelo debe ser mayor que 1.", "numeroServidores");
-            
+                throw new ArgumentException("El numero de servidores para este modelo debe ser mayor que 1.");
+            if (tasaMediaTiempoLlegadaClientes >= tasaMediaTiempoServicio * numeroServidores)
+                throw new ArgumentException("El factor de utilizacion debe ser menor que mu para que sea un sistema estable");
+               
             this.numeroServidores = numeroServidores;
             this.tasaMediaTiempoLlegadaClientes = tasaMediaTiempoLlegadaClientes;
             this.tasaMediaTiempoServicio = tasaMediaTiempoServicio;
             setFactorUtilizacion(numeroServidores);
-            setNumeroEsperadoClientesFila(this.factorUtilizacion);
+            setNumeroEsperadoClientesFila(this.factorUtilizacion, tasaMediaTiempoLlegadaClientes, tasaMediaTiempoServicio, numeroServidores);
             setNumeroEsperadoClientesSistema(this.numeroEsperadoClientesFila);
             setTiempoEsperaEstimadoSistema(this.numeroEsperadoClientesSistema, this.tasaMediaTiempoLlegadaClientes);
             setTiempoEsperaEstimadoFila(this.numeroEsperadoClientesFila, this.tasaMediaTiempoLlegadaClientes);
         }
 
-        public override void setNumeroEsperadoClientesFila(float factorUtilizacion, float tasaMediaTiempoLlegadaClientes, float tasaMediaTiempoServicio, int numeroClientes, int numeroServidores)
+        public void setNumeroEsperadoClientesFila(float factorUtilizacion, float tasaMediaTiempoLlegadaClientes, float tasaMediaTiempoServicio, int numeroServidores)
         {
-            float probabilidadCero = this.calcularProbabilidadNClientesSistema(tasaMediaTiempoLlegadaClientes, tasaMediaTiempoServicio, numeroClientes, numeroServidores);
+            float probabilidadCero = this.calcularProbabilidadNClientesSistema(tasaMediaTiempoLlegadaClientes, tasaMediaTiempoServicio, 0, numeroServidores);
             int factorialServidores = this.factorial(numeroServidores);
 
             float numeroClientesFila = (float)((probabilidadCero * Math.Pow(tasaMediaTiempoLlegadaClientes / tasaMediaTiempoServicio, numeroServidores) * factorUtilizacion) /
@@ -42,19 +42,19 @@ namespace Lineas_de_Espera
             this.numeroEsperadoClientesFila = numeroClientesFila;
         }
 
-        public override void setNumeroEsperadoClientesSistema(float numeroEsperadoClientesFila)
+        public void setNumeroEsperadoClientesSistema(float numeroEsperadoClientesFila)
         {
             float numeroClientesSistema = numeroEsperadoClientesFila + (this.tasaMediaTiempoLlegadaClientes / tasaMediaTiempoServicio);
             this.numeroEsperadoClientesSistema = numeroClientesSistema;
         }
 
-        public override void setTiempoEsperaEstimadoSistema(float numeroEsperadoClientesSistema, float tasaMediaTiempoLlegadaClientes)
+        public void setTiempoEsperaEstimadoSistema(float numeroEsperadoClientesSistema, float tasaMediaTiempoLlegadaClientes)
         {
             float tiempoEsperaSistema = numeroEsperadoClientesSistema / tasaMediaTiempoLlegadaClientes;
             this.tiempoEsperaEstimadoSistema = tiempoEsperaSistema;
         }
 
-        public override void setTiempoEsperaEstimadoFila(float numeroEsperadoClientesFila, float tasaMediaTiempoLlegadaClientes)
+        public void setTiempoEsperaEstimadoFila(float numeroEsperadoClientesFila, float tasaMediaTiempoLlegadaClientes)
         {
             float tiempoEsperaFila = numeroEsperadoClientesFila / tasaMediaTiempoLlegadaClientes;
             this.tiempoEsperaEstimadoFila = tiempoEsperaFila;

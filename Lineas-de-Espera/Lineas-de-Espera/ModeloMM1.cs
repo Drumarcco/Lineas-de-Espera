@@ -17,7 +17,7 @@ namespace Lineas_de_Espera
         {
             if (tasaMediaTiempoLlegadaClientes >= tasaMediaTiempoServicio)
             {
-                throw new ArgumentException("Lambda debe ser menor que Mu", "tasaMediaTiempoLlegadaClientes");
+                throw new ArgumentException("Lambda debe ser menor que Mu");
             }
             this.numeroServidores = 1;
             this.tasaMediaTiempoLlegadaClientes = tasaMediaTiempoLlegadaClientes;
@@ -29,28 +29,28 @@ namespace Lineas_de_Espera
             setTiempoEsperaEstimadoFila(this.tasaMediaTiempoLlegadaClientes, this.tasaMediaTiempoServicio);
         }
         //Numero esperado de clientes valor de L
-        public override void setNumeroEsperadoClientesSistema(float factorUtilizacion)
+        public void setNumeroEsperadoClientesSistema(float factorUtilizacion)
         {
             float numeroEsperadoClientes;
             numeroEsperadoClientes = factorUtilizacion / (1 - factorUtilizacion);
             this.numeroEsperadoClientesSistema = numeroEsperadoClientes;
         }
 
-        public override void setNumeroEsperadoClientesFila(float factorUtilizacion)
+        public void setNumeroEsperadoClientesFila(float factorUtilizacion)
         {
             float numeroEsperadoClientes;
             numeroEsperadoClientes = (float) (Math.Pow(factorUtilizacion, 2) / (1 - factorUtilizacion));
             this.numeroEsperadoClientesFila = numeroEsperadoClientes;
         }
 
-        public override void setTiempoEsperaEstimadoSistema(float tasaMediaTiempoServicio, float tasaMediaTiempoLlegadaClientes)
+        public void setTiempoEsperaEstimadoSistema(float tasaMediaTiempoServicio, float tasaMediaTiempoLlegadaClientes)
         {
             float tiempoEsperaEstimado;
             tiempoEsperaEstimado = 1 / (tasaMediaTiempoServicio - tasaMediaTiempoLlegadaClientes);
             this.tiempoEsperaEstimadoSistema = tiempoEsperaEstimado;
         }
 
-        public override void setTiempoEsperaEstimadoFila(float tasaMediaTiempoLlegadaClientes, float tasaMediaTiempoServicio)
+        public void setTiempoEsperaEstimadoFila(float tasaMediaTiempoLlegadaClientes, float tasaMediaTiempoServicio)
         {
             float tiempoEsperaEstimado;
             tiempoEsperaEstimado = tasaMediaTiempoLlegadaClientes / (tasaMediaTiempoServicio * (tasaMediaTiempoServicio - tasaMediaTiempoLlegadaClientes));

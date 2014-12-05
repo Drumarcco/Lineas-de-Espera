@@ -15,6 +15,8 @@ namespace Lineas_de_Espera
         /// <param name="tasaMediaTiempoServicio">Mu</param>
         public ModeloMD1(float tasaMediaTiempoLlegadaClientes, float tasaMediaTiempoServicio)
         {
+            if (tasaMediaTiempoLlegadaClientes >= tasaMediaTiempoServicio)
+                throw new ArgumentException("Lambda debe ser menor que mu");
             this.numeroServidores = 1;
             this.tasaMediaTiempoLlegadaClientes = tasaMediaTiempoLlegadaClientes;
             this.tasaMediaTiempoServicio = tasaMediaTiempoServicio;
@@ -26,14 +28,14 @@ namespace Lineas_de_Espera
 
         }
 
-        public override void setNumeroEsperadoClientesSistema(float factorUtilizacion, float numeroEsperadoClientesFila)
+        public void setNumeroEsperadoClientesSistema(float factorUtilizacion, float numeroEsperadoClientesFila)
         {
             float numeroEsperadoClientes;
             numeroEsperadoClientes = factorUtilizacion + numeroEsperadoClientesFila;
             this.numeroEsperadoClientesSistema = numeroEsperadoClientes;
         }
 
-        public override void setNumeroEsperadoClientesFila(float factorUtilizacion)
+        public void setNumeroEsperadoClientesFila(float factorUtilizacion)
         {
 
             float numeroEsperadoClientes;
@@ -41,14 +43,14 @@ namespace Lineas_de_Espera
             this.numeroEsperadoClientesFila = numeroEsperadoClientes;
         }
 
-        public override void setTiempoEsperaEstimadoSistema(float factorUtilizacion, float tiempoEsperaEstimadoFila)
+        public void setTiempoEsperaEstimadoSistema(float factorUtilizacion, float tiempoEsperaEstimadoFila)
         {
             float tiempoEsperaEstimado;
             tiempoEsperaEstimado = tiempoEsperaEstimadoFila + factorUtilizacion;
             this.tiempoEsperaEstimadoSistema = tiempoEsperaEstimado;
         }
 
-        public override void setTiempoEsperaEstimadoFila(float tasaMediaTiempoLlegadaClientes, float numeroEsperadoClientesFila)
+        public void setTiempoEsperaEstimadoFila(float tasaMediaTiempoLlegadaClientes, float numeroEsperadoClientesFila)
         {
             float tiempoEsperaEstimado;
             tiempoEsperaEstimado = tiempoEsperaEstimadoFila / tasaMediaTiempoLlegadaClientes;
