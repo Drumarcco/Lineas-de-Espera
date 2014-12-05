@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lineas_de_Espera
 {
-    class ModeloMG1 : ModeloLineaDeEspera
+    public class ModeloMG1 : ModeloLineaDeEspera
     {
         #region Member Variables
         private float _desviacionEstandar;
@@ -32,14 +32,16 @@ namespace Lineas_de_Espera
             this.tasaMediaTiempoServicio = tasaMediaTiempoServicio;
             this.desviacionEstandar = desviacionEstandar;
             setFactorUtilizacion();
-            //L
-            setNumeroEsperadoClientesSistema(this.factorUtilizacion, this.numeroEsperadoClientesFila);
+
             //Lq
             setNumeroEsperadoClientesFila(this.factorUtilizacion, this.tasaMediaTiempoLlegadaClientes, this.desviacionEstandar);
-            //W
-            setTiempoEsperaEstimadoSistema(this.tasaMediaTiempoServicio, this.tiempoEsperaEstimadoFila);
+            //L
+            setNumeroEsperadoClientesSistema(this.factorUtilizacion, this.numeroEsperadoClientesFila);
             //Wq
             setTiempoEsperaEstimadoFila(this.tasaMediaTiempoLlegadaClientes, this.numeroEsperadoClientesFila);
+            //W
+            setTiempoEsperaEstimadoSistema(this.tasaMediaTiempoServicio, this.tiempoEsperaEstimadoFila);
+            
         }
         //L
         public void setNumeroEsperadoClientesSistema(float factorUtilizacion, float numeroEsperadoClientesFila)
@@ -50,7 +52,7 @@ namespace Lineas_de_Espera
         //Lq
         public void setNumeroEsperadoClientesFila(float factorUtilizacion, float tasaMediaTiempoLlegadaClientes, float desviacionEstandar)
         {
-            float numeroEsperadoClientesFila = (float)((Math.Pow(tasaMediaTiempoLlegadaClientes, 2) * Math.Pow(desviacionEstandar, 2)) + Math.Pow(factorUtilizacion, 2) / 2* (1 - factorUtilizacion));
+            float numeroEsperadoClientesFila = (float)(( (Math.Pow(tasaMediaTiempoLlegadaClientes, 2) * Math.Pow(desviacionEstandar, 2)) + Math.Pow(factorUtilizacion, 2)) / (2* (1 - factorUtilizacion)));
             this.numeroEsperadoClientesFila = numeroEsperadoClientesFila;
         }
         //W

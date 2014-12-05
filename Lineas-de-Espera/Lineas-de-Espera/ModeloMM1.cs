@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lineas_de_Espera
 {
-    class ModeloMM1 : ModeloLineaDeEspera
+    public class ModeloMM1 : ModeloLineaDeEspera
     {
         /// <summary>
         /// Constructor de Modelo MM1 de Lineas de Espera.

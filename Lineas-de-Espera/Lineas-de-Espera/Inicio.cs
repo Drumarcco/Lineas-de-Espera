@@ -39,14 +39,20 @@ namespace Lineas_de_Espera
                 if (nombreModelo == "M/M/1")
                 {
                     ModeloMM1 modelo = new ModeloMM1(tasaMediaLlegadaClientes, tasaMediaTiempoServicio);
+                    ModeloUniServidor formModelo = new ModeloUniServidor(modelo);
+                    formModelo.Show();
                 }
                 else if (nombreModelo == "M/G/1")
                 {
                     ModeloMG1 modelo = new ModeloMG1(tasaMediaLlegadaClientes, tasaMediaTiempoServicio, desviacionEstandar);
+                    ModeloUniServidor formModelo = new ModeloUniServidor(modelo);
+                    formModelo.Show();
                 }
                 else if (nombreModelo == "M/D/1")
                 {
                     ModeloMD1 modelo = new ModeloMD1(tasaMediaLlegadaClientes, tasaMediaTiempoServicio);
+                    ModeloUniServidor formModelo = new ModeloUniServidor(modelo);
+                    formModelo.Show();
                 }
                 else if (nombreModelo == "M/M/S")
                 {

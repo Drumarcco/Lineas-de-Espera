@@ -16,7 +16,7 @@ namespace Lineas_de_Espera
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new Inicio());
         }
     }
 }

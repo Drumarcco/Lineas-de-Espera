@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lineas_de_Espera
 {
-    class ModeloLineaDeEspera
+    public class ModeloLineaDeEspera
     {
         #region Member Variables
         private float _tasaMediaTiempoLlegadaClientes;  // Lambda λ
@@ -59,8 +59,7 @@ namespace Lineas_de_Espera
             get { return _numeroServidores; }
             set { _numeroServidores = value; }
         }
-        public float factorUtilizacion { get; private set; }
-        public float desviacionEstandar { get; set; }
+        public float factorUtilizacion { get { return _factorUtilizacion; } set { _factorUtilizacion = value; } }
 
 
         /// <summary>

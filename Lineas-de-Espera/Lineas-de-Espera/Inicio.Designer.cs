@@ -71,7 +71,7 @@
             this.btn_CalcularModelo.Location = new System.Drawing.Point(226, 179);
             this.btn_CalcularModelo.Name = "btn_CalcularModelo";
             this.btn_CalcularModelo.Size = new System.Drawing.Size(75, 23);
-            this.btn_CalcularModelo.TabIndex = 2;
+            this.btn_CalcularModelo.TabIndex = 6;
             this.btn_CalcularModelo.Text = "Calcular";
             this.btn_CalcularModelo.UseVisualStyleBackColor = true;
             this.btn_CalcularModelo.Click += new System.EventHandler(this.btn_CalcularModelo_Click);
