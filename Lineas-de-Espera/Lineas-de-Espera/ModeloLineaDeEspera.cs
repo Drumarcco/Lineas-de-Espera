@@ -17,6 +17,7 @@ namespace Lineas_de_Espera
         private float _tiempoEsperaEstimadoFila;        // Wq
         private float _factorUtilizacion;               // Rho
         private int _numeroServidores;                  // s
+        public float desviacionEstandar;                // desviacion
         #endregion
 
         #region Getters & Setters
@@ -80,13 +81,19 @@ namespace Lineas_de_Espera
 
 
         #region Abstract Setters
+        //L
         public abstract void setNumeroEsperadoClientesSistema(float factorUtilizacion);
-        public abstract void setNumeroEsperadoClientesFila(float factorUtilizacion);
-        public abstract void setNumeroEsperadoClientesFila(float factorUtilizacion, float tasaMediaTiempoLlegadaClientes,
-            float tasaMediaTiempoServicio, int numeroClientes, int numeroServidores);
-        public abstract void setTiempoEsperaEstimadoSistema(float tasaMediaTiempoServicio, float tasaMediaTiempoLlegadaClientes);
-        public abstract void setTiempoEsperaEstimadoFila(float tasaMediaTiempoLlegadaClientes, float tasaMediaTiempoServicio);
         public abstract void setNumeroEsperadoClientesSistema(float factorUtilizacion, float numeroEsperadoClientesFila);
+        //Lq
+        public abstract void setNumeroEsperadoClientesFila(float factorUtilizacion);
+        public abstract void setNumeroEsperadoClientesFila(float factorUtilizacion, float tasaMediaTiempoLlegadaClientes, float desviacionEstandar);
+        public abstract void setNumeroEsperadoClientesFila(float factorUtilizacion, float tasaMediaTiempoLlegadaClientes, float tasaMediaTiempoServicio, int numeroClientes, int numeroServidores);
+        //W
+        public abstract void setTiempoEsperaEstimadoSistema(float tasaMediaTiempoServicio, float tasaMediaTiempoLlegadaClientes);
+
+        //Wq
+        public abstract void setTiempoEsperaEstimadoFila(float tasaMediaTiempoLlegadaClientes, float tasaMediaTiempoServicio);
+        
 
         #endregion       
         
