@@ -147,6 +147,42 @@ namespace Lineas_de_Espera
         }
 
         /// <summary>
+        /// Generar lista de probabilidades de llegada de clientes para sistemas de un servidor.
+        /// </summary>
+        /// <param name="factorUtilizacion">Factor de utilizacion del sistema</param>
+        /// <returns>Lista de strings</returns>
+        public List<string> generarListaProbabilidadesClientes(float factorUtilizacion)
+        {
+            List<string> listaProbabilidades = new List<string>();
+            for (int i = 0; i <= 10; i++)
+            {
+                float probabilidad = calcularProbabilidadNClientesSistema(factorUtilizacion, i);
+                string enunciado = "P" + i + "=" + probabilidad;
+                listaProbabilidades.Add(enunciado);
+            }
+            return listaProbabilidades;
+        }
+
+        /// <summary>
+        /// Generar lista de probabilidades de llegada de clientes para sistemas multi-servidor.
+        /// </summary>
+        /// <param name="tasaMediaTiempoLlegadaClientes">Lambda</param>
+        /// <param name="tasaMediaTiempoServicio">Mu</param>
+        /// <param name="numeroServidores">Numero de servidores en el sistema</param>
+        /// <returns></returns>
+        public List<string> generarListaProbabilidadesClientes(float tasaMediaTiempoLlegadaClientes, float tasaMediaTiempoServicio, int numeroServidores)
+        {
+            List<string> listaProbabilidades = new List<string>();
+            for (int i = 0; i <= 10; i++)
+            {
+                float probabilidad = calcularProbabilidadNClientesSistema(tasaMediaTiempoLlegadaClientes, tasaMediaTiempoServicio, i, numeroServidores);
+                string enunciado = "P" + i + "=" + probabilidad;
+                listaProbabilidades.Add(enunciado);
+            }
+            return listaProbabilidades;
+        }
+
+        /// <summary>
         /// Calcula la probabilidad de que entren 0 o N numero de clientes al sistema de multiples servidores.
         /// </summary>
         /// <param name="tasaMediaTiempoLlegadaClientes">Lambda</param>
@@ -217,7 +253,6 @@ namespace Lineas_de_Espera
         private float calcularSumatoriaDivisoraProbabilidadCero(float tasaMediaTiempoLlegadaClientes, float tasaMediaTiempoServicio, int numeroServidores)
         {
             float sumatoria = 0;
-            //float factorialN = factorial(numeroClientes);
             float factorialS = factorial(numeroServidores);
             for (int n = 0; n < numeroServidores; n++)
             {
