@@ -71,7 +71,7 @@
             this.btn_CalcularModelo.Location = new System.Drawing.Point(226, 179);
             this.btn_CalcularModelo.Name = "btn_CalcularModelo";
             this.btn_CalcularModelo.Size = new System.Drawing.Size(75, 23);
-            this.btn_CalcularModelo.TabIndex = 6;
+            this.btn_CalcularModelo.TabIndex = 5;
             this.btn_CalcularModelo.Text = "Calcular";
             this.btn_CalcularModelo.UseVisualStyleBackColor = true;
             this.btn_CalcularModelo.Click += new System.EventHandler(this.btn_CalcularModelo_Click);
@@ -99,14 +99,14 @@
             this.txt_lambda.Location = new System.Drawing.Point(201, 43);
             this.txt_lambda.Name = "txt_lambda";
             this.txt_lambda.Size = new System.Drawing.Size(100, 20);
-            this.txt_lambda.TabIndex = 5;
+            this.txt_lambda.TabIndex = 1;
             // 
             // txt_mu
             // 
             this.txt_mu.Location = new System.Drawing.Point(201, 73);
             this.txt_mu.Name = "txt_mu";
             this.txt_mu.Size = new System.Drawing.Size(100, 20);
-            this.txt_mu.TabIndex = 6;
+            this.txt_mu.TabIndex = 2;
             // 
             // label4
             // 
@@ -122,14 +122,14 @@
             this.txt_numeroServidores.Location = new System.Drawing.Point(201, 106);
             this.txt_numeroServidores.Name = "txt_numeroServidores";
             this.txt_numeroServidores.Size = new System.Drawing.Size(100, 20);
-            this.txt_numeroServidores.TabIndex = 8;
+            this.txt_numeroServidores.TabIndex = 3;
             // 
             // txt_desviacionEstandar
             // 
             this.txt_desviacionEstandar.Location = new System.Drawing.Point(201, 140);
             this.txt_desviacionEstandar.Name = "txt_desviacionEstandar";
             this.txt_desviacionEstandar.Size = new System.Drawing.Size(100, 20);
-            this.txt_desviacionEstandar.TabIndex = 9;
+            this.txt_desviacionEstandar.TabIndex = 4;
             // 
             // label5
             // 
