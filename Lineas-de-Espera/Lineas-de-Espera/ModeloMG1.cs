@@ -67,5 +67,6 @@ namespace Lineas_de_Espera
             float tiempoEsperaEstimadoFila = numeroEsperadoClientesFila / tasaMediaTiempoLlegadaClientes;
             this.tiempoEsperaEstimadoFila = tiempoEsperaEstimadoFila;
         }
+
     }
 }
