@@ -53,7 +53,7 @@ namespace Lineas_de_Espera
         public void setTiempoEsperaEstimadoFila(float tasaMediaTiempoLlegadaClientes, float numeroEsperadoClientesFila)
         {
             float tiempoEsperaEstimado;
-            tiempoEsperaEstimado = tiempoEsperaEstimadoFila / tasaMediaTiempoLlegadaClientes;
+            tiempoEsperaEstimado = numeroEsperadoClientesFila / tasaMediaTiempoLlegadaClientes;
             this.tiempoEsperaEstimadoFila = tiempoEsperaEstimado;
         }
     }
