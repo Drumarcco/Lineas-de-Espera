@@ -52,6 +52,7 @@
     </Compile>
     <Compile Include="ModeloLineaDeEspera.cs" />
     <Compile Include="ModeloMD1.cs" />
+    <Compile Include="ModeloMDS.cs" />
     <Compile Include="ModeloMG1.cs" />
     <Compile Include="ModeloMM1.cs" />
     <Compile Include="ModeloMMS.cs" />
@@ -63,6 +64,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ValoresMDS.cs" />
     <EmbeddedResource Include="Inicio.resx">
       <DependentUpon>Inicio.cs</DependentUpon>
       <SubType>Designer</SubType>
