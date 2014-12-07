@@ -50,7 +50,7 @@
             "M/G/1",
             "M/D/1",
             "M/M/S",
-            "M/G/S"});
+            "M/D/S"});
             this.cbx_listaModelos.Location = new System.Drawing.Point(201, 10);
             this.cbx_listaModelos.Name = "cbx_listaModelos";
             this.cbx_listaModelos.Size = new System.Drawing.Size(100, 21);

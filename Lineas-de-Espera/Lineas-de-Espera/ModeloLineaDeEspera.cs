@@ -154,7 +154,7 @@ namespace Lineas_de_Espera
         public List<string> generarListaProbabilidadesClientes(float factorUtilizacion)
         {
             List<string> listaProbabilidades = new List<string>();
-            for (int i = 0; i <= 10; i++)
+            for (int i = 0; i <= 50; i++)
             {
                 float probabilidad = calcularProbabilidadNClientesSistema(factorUtilizacion, i);
                 string enunciado = "P" + i + "=" + probabilidad;
@@ -173,7 +173,7 @@ namespace Lineas_de_Espera
         public List<string> generarListaProbabilidadesClientes(float tasaMediaTiempoLlegadaClientes, float tasaMediaTiempoServicio, int numeroServidores)
         {
             List<string> listaProbabilidades = new List<string>();
-            for (int i = 0; i <= 10; i++)
+            for (int i = 0; i <= 50; i++)
             {
                 float probabilidad = calcularProbabilidadNClientesSistema(tasaMediaTiempoLlegadaClientes, tasaMediaTiempoServicio, i, numeroServidores);
                 string enunciado = "P" + i + "=" + probabilidad;
