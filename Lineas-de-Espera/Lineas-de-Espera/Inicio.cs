@@ -30,10 +30,14 @@ namespace Lineas_de_Espera
                 tasaMediaTiempoServicio = float.Parse(txt_mu.Text);
                 numeroServidores = int.Parse(txt_numeroServidores.Text);
                 float desviacionEstandar=0;
+
                 if (cbx_listaModelos.SelectedItem.ToString() == "M/G/1")
                 {
                     desviacionEstandar = float.Parse(txt_desviacionEstandar.Text);
                 }
+
+                if (tasaMediaLlegadaClientes < 0 || tasaMediaTiempoServicio < 0 || numeroServidores < 0 || desviacionEstandar < 0)
+                    throw new ArgumentException("Los parametros deben ser positivos.");
                 
                 string nombreModelo = cbx_listaModelos.SelectedItem.ToString();
                 if (nombreModelo == "M/M/1")
@@ -57,10 +61,14 @@ namespace Lineas_de_Espera
                 else if (nombreModelo == "M/M/S")
                 {
                     ModeloMMS modelo = new ModeloMMS(tasaMediaLlegadaClientes, tasaMediaTiempoServicio, numeroServidores);
+                    ModeloUniServidor formModelo = new ModeloUniServidor(modelo);
+                    formModelo.Show();
                 }
                 else if (nombreModelo == "M/D/S")
                 {
-                    throw new NotImplementedException();
+                    ModeloMDS modelo = new ModeloMDS(tasaMediaLlegadaClientes, tasaMediaTiempoServicio, numeroServidores);
+                    ModeloUniServidor formModelo = new ModeloUniServidor(modelo);
+                    formModelo.Show();
                 }
             }
             catch (FormatException)
@@ -79,7 +87,7 @@ namespace Lineas_de_Espera
             btn_CalcularModelo.Enabled = true;
             string modelo = cbx_listaModelos.SelectedItem.ToString();
             if (modelo == "M/G/1") txt_desviacionEstandar.Enabled = true;
-            if (modelo == "M/M/S" || modelo == "M/G/S") txt_numeroServidores.Enabled = true;
+            if (modelo == "M/M/S" || modelo == "M/D/S") txt_numeroServidores.Enabled = true;
         }
 
         private void limpiarCampos()
