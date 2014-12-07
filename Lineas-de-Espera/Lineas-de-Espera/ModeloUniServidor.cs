@@ -12,10 +12,14 @@ namespace Lineas_de_Espera
 {
     public partial class ModeloUniServidor : Form
     {
+        ModeloMM1 _modeloMM1;
+        ModeloMD1 _modeloMD1;
+        ModeloMG1 _modeloMG1;
         public ModeloUniServidor(ModeloMM1 modeloMM1)
         {
             InitializeComponent();
             this.Text = "Modelo M/M/1";
+            _modeloMM1 = modeloMM1;
             txt_lambda.Text = modeloMM1.tasaMediaTiempoLlegadaClientes.ToString();
             txt_mu.Text = modeloMM1.tasaMediaTiempoServicio.ToString();
             lbl_factorUtilizacion.Text = modeloMM1.factorUtilizacion.ToString();
@@ -31,6 +35,7 @@ namespace Lineas_de_Espera
         {
             InitializeComponent();
             this.Text = "Modelo M/G/1";
+            _modeloMG1 = modeloMG1;
             txt_lambda.Text = modeloMG1.tasaMediaTiempoLlegadaClientes.ToString() ;
             txt_mu.Text = modeloMG1.tasaMediaTiempoServicio.ToString();
             lbl_factorUtilizacion.Text = modeloMG1.factorUtilizacion.ToString();
@@ -45,6 +50,7 @@ namespace Lineas_de_Espera
         public ModeloUniServidor(ModeloMD1 modeloMD1){
             InitializeComponent();
             this.Text = "Modelo M/D/1";
+            _modeloMD1 = modeloMD1;
             txt_lambda.Text = modeloMD1.tasaMediaTiempoLlegadaClientes.ToString();
             txt_mu.Text = modeloMD1.tasaMediaTiempoServicio.ToString();
             lbl_factorUtilizacion.Text = modeloMD1.factorUtilizacion.ToString();
@@ -63,6 +69,21 @@ namespace Lineas_de_Espera
             }
         }
 
+        private void calcularProbabilidadesTiempoExcedente()
+        {
+            if (this.Text.Contains("M/M/1"))
+            {
+                throw new NotImplementedException();
+            }
+            else if (this.Text.Contains("M/G/1"))
+            {
+                throw new NotImplementedException();
+            }
+            else if (this.Text.Contains("M/D/1"))
+            {
+                throw new NotImplementedException();
+            }
+        }
         private void txt_mu_TextChanged(object sender, EventArgs e)
         {
 
