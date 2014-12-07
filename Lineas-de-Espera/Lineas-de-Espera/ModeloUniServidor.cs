@@ -151,11 +151,11 @@ namespace Lineas_de_Espera
             }
             else if (_modeloMMS != null)
             {
-
+                calcularProbabilidadesTiempoExcedenteMMS(_modeloMMS, tiempo);
             }
             else if (_modeloMDS != null)
             {
-
+                calcularProbabilidadesTiempoExcedenteMDS(_modeloMDS, tiempo);
             }
         }
 
@@ -192,12 +192,24 @@ namespace Lineas_de_Espera
             lbl_wqMayorT.Text = PQwt.ToString();
         }
 
-        private void calcularProbabilidadesTiempoExcedenteMMS(ModeloMDS modelo, float tiempo)
+        private void calcularProbabilidadesTiempoExcedenteMMS(ModeloMMS modelo, float tiempo)
         {
             float PWt;
             float PQwt;
 
-            
+            PWt = modelo.calcularProbabilidadTiempoEsperaSistemaExcedente(modelo.tasaMediaTiempoLlegadaClientes, modelo.tasaMediaTiempoServicio, 
+                modelo.factorUtilizacion, modelo.numeroServidores, tiempo);
+            lbl_wMayorT.Text = PWt.ToString();
+        }
+
+        private void calcularProbabilidadesTiempoExcedenteMDS(ModeloMDS modelo, float tiempo)
+        {
+            float PWt;
+            float PQwt;
+
+            PWt = modelo.calcularProbabilidadTiempoEsperaSistemaExcedente(modelo.tasaMediaTiempoLlegadaClientes, modelo.tasaMediaTiempoServicio,
+                modelo.factorUtilizacion, modelo.numeroServidores, tiempo);
+            lbl_wMayorT.Text = PWt.ToString();
         }
         #endregion
 

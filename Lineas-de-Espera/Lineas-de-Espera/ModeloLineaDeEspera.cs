@@ -123,6 +123,23 @@ namespace Lineas_de_Espera
             return probabilidad;
         }
 
+        public float calcularProbabilidadTiempoEsperaSistemaExcedente(float tasaMediaTiempoLlegadaClientes, float tasaMediaTiempoServicio,
+            float factorUtilizacion, int numeroServidores, float tiempo)
+        {
+            float probabilidadCero = calcularProbabilidadNClientesSistema(tasaMediaTiempoLlegadaClientes, tasaMediaTiempoServicio, 0, numeroServidores);
+
+            float monomio1 = (float)Math.Exp(-tasaMediaTiempoServicio * tiempo);
+
+            float monomio2 = (float)(1 + probabilidadCero * (Math.Pow(tasaMediaTiempoLlegadaClientes / tasaMediaTiempoServicio, numeroServidores))) /
+                (factorial(numeroServidores) * (1 - factorUtilizacion));
+
+            float monomio3 = (float)(1 - Math.Exp((-tasaMediaTiempoServicio * tiempo) * (numeroServidores - 1 - (tasaMediaTiempoLlegadaClientes / tasaMediaTiempoServicio)))) /
+                (numeroServidores - 1 - (tasaMediaTiempoLlegadaClientes / tasaMediaTiempoServicio));
+
+            float resultadoEcuacion = monomio1 * (monomio2 * monomio3);
+            return resultadoEcuacion;
+        }
+
         public float calcularProbabilidadTiempoEsperaFilaExcedente(float factorUtilizacion, float tasaMediaTiempoServicio,
             float tiempo)
         {
