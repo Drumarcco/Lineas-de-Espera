@@ -200,7 +200,7 @@ namespace Lineas_de_Espera
             PWt = modelo.calcularProbabilidadTiempoEsperaSistemaExcedente(modelo.tasaMediaTiempoServicio, modelo.factorUtilizacion, tiempo);
             PQwt = modelo.calcularProbabilidadTiempoEsperaFilaExcedente(modelo.factorUtilizacion, modelo.tasaMediaTiempoServicio, tiempo);
             lbl_wMayorT.Text = PWt.ToString();
-            lbl_wqMayorT.Text = PWt.ToString();
+            lbl_wqMayorT.Text = PQwt.ToString();
         }
 
         private void calcularProbabilidadesTiempoExcedenteMD1(ModeloMD1 modelo, float tiempo)
