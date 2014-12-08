@@ -125,6 +125,28 @@ namespace Lineas_de_Espera
         {
 
         }
+
+        private void txt_Tiempo_TextChanged(object sender, EventArgs e)
+        {
+            if (txt_Tiempo.Text != "")
+            {
+                try
+                {
+                    float tiempo = float.Parse(txt_Tiempo.Text);
+                    if (tiempo < 0) throw new ArgumentException("El tiempo no puede ser negativo.");
+                    calcularProbabilidadesTiempoExcedente(tiempo);
+                }
+                catch (FormatException)
+                {
+                    MessageBox.Show("El formato del texto introducido es incorrecto.");
+                    txt_Tiempo.Clear();
+                }
+                catch (ArgumentException argException)
+                {
+                    MessageBox.Show(argException.Message);
+                }
+            }
+        }
         #endregion
 
         #region Other Methods
@@ -213,26 +235,6 @@ namespace Lineas_de_Espera
         }
         #endregion
 
-        private void txt_Tiempo_TextChanged(object sender, EventArgs e)
-        {
-            if (txt_Tiempo.Text != "")
-            {
-                try
-                {
-                    float tiempo = float.Parse(txt_Tiempo.Text);
-                    if (tiempo < 0) throw new ArgumentException("El tiempo no puede ser negativo.");
-                    calcularProbabilidadesTiempoExcedente(tiempo);
-                }
-                catch (FormatException)
-                {
-                    MessageBox.Show("El formato del texto introducido es incorrecto.");
-                    txt_Tiempo.Clear();
-                }
-                catch (ArgumentException argException)
-                {
-                    MessageBox.Show(argException.Message);
-                }
-            }
-        }
+        
     }
 }

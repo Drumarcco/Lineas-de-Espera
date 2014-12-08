@@ -273,13 +273,13 @@ namespace Lineas_de_Espera
             float factorialS = factorial(numeroServidores);
             for (int n = 0; n < numeroServidores; n++)
             {
-                float monomio1 = (float) Math.Pow(tasaMediaTiempoLlegadaClientes / tasaMediaTiempoServicio, n) / factorial(n);
-                float monomio2 = (float) Math.Pow(tasaMediaTiempoLlegadaClientes / tasaMediaTiempoServicio, numeroServidores) / factorialS;
-                float monomio3 = (float) 1 / (1 - tasaMediaTiempoLlegadaClientes / (numeroServidores * tasaMediaTiempoServicio));
-
-                sumatoria += monomio1 + monomio2 * monomio3;
+                float monomio1 = (float)Math.Pow(tasaMediaTiempoLlegadaClientes / tasaMediaTiempoServicio, n) / factorial(n);
+                sumatoria += monomio1;
             }
-            return sumatoria;
+            float monomio2 = (float)Math.Pow(tasaMediaTiempoLlegadaClientes / tasaMediaTiempoServicio, numeroServidores) / factorialS;
+            float monomio3 = (float)1 / (1 - tasaMediaTiempoLlegadaClientes / (numeroServidores * tasaMediaTiempoServicio));
+            float resultado = sumatoria + monomio2 * monomio3;
+            return resultado;
         }
 
         /// <summary>
