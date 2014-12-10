@@ -245,15 +245,15 @@ namespace Lineas_de_Espera
 
         private void inicializarTips()
         {
-            tip_universal.SetToolTip(label1, "Factor de utilizacion es bla la bla y se mide en bla bla bla");
+            tip_universal.SetToolTip(label1, "Factor de utilizacion es la intensidad del trafico en el sistema y siempre debe ser < 1");
             tip_universal.SetToolTip(label2, "Lambda es bla bla bla y se mide en bla bla bla");
             tip_universal.SetToolTip(label3, "Mu es bla bla bla y se mide en bla bla bla");
-            tip_universal.SetToolTip(label4, "L es bla bla bla y se mide en bla bla bla");
-            tip_universal.SetToolTip(label5, "Lq es bla bla bla y se mide en bla bla bla");
-            tip_universal.SetToolTip(label6, "W es bla bla bla y se mide en bla bla bla");
-            tip_universal.SetToolTip(label7, "Wq es bla bla bla y se mide en bla bla bla");
-            tip_universal.SetToolTip(label8, "Numero de servidores es bla bla bla");
-            tip_universal.SetToolTip(label9, "Tiempo es bla bla bla");
+            tip_universal.SetToolTip(label4, "L es el numero esperado de clientes en el sistema (incluyendo los atendidos)");
+            tip_universal.SetToolTip(label5, "Lq es el numero de clientes en la fila (sin los atendidos)");
+            tip_universal.SetToolTip(label6, "W es el tiempo de espera estimado en el sistema (incluyendo tiempo de servicio) para cada cliente");
+            tip_universal.SetToolTip(label7, "Wq es el tiempo de espera estimado en la fila (excluyendo tiempo de servicio) para cada cliente");
+            tip_universal.SetToolTip(label8, "Numero de servidores es la cantidad total de canales de servicio, ya sea en paralelo o en red ");
+            tip_universal.SetToolTip(label9, "Tiempo de servicio es el periodo que transcurre desde inicio del servicio para un cliente, hasta el final y puede medirse en segundos, minutos u horas");
 
         }
         #endregion
