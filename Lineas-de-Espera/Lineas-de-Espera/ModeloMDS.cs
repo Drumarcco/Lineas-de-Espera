@@ -165,7 +165,7 @@ namespace Lineas_de_Espera
 
         public void setTiempoEsperaEstimadoFila(float tiempoEsperaEstimadoSistema, float tasaMediaTiempoServicio)
         {
-            this.tiempoEsperaEstimadoFila = tiempoEsperaEstimadoSistema - invertirValor(tasaMediaTiempoServicio);
+             this.tiempoEsperaEstimadoFila = tiempoEsperaEstimadoSistema - invertirValor(tasaMediaTiempoServicio);
         }
 
         public void setNumeroEsperadoClientesFila(float tasaMediaTiempoLlegadaClientes, float tiempoEsperaEstimadoFila)

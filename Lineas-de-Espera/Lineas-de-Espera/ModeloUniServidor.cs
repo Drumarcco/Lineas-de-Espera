@@ -24,6 +24,7 @@ namespace Lineas_de_Espera
         public ModeloUniServidor(ModeloMM1 modeloMM1)
         {
             InitializeComponent();
+            inicializarTips();
             this.Text = "Modelo M/M/1";
             _modeloMM1 = modeloMM1;
             lbl_lambda.Text = modeloMM1.tasaMediaTiempoLlegadaClientes.ToString();
@@ -41,6 +42,7 @@ namespace Lineas_de_Espera
         public ModeloUniServidor(ModeloMG1 modeloMG1)
         {
             InitializeComponent();
+            inicializarTips();
             this.Text = "Modelo M/G/1";
             _modeloMG1 = modeloMG1;
             lbl_lambda.Text = modeloMG1.tasaMediaTiempoLlegadaClientes.ToString() ;
@@ -60,6 +62,7 @@ namespace Lineas_de_Espera
 
         public ModeloUniServidor(ModeloMD1 modeloMD1){
             InitializeComponent();
+            inicializarTips();
             this.Text = "Modelo M/D/1";
             _modeloMD1 = modeloMD1;
             lbl_lambda.Text = modeloMD1.tasaMediaTiempoLlegadaClientes.ToString();
@@ -77,6 +80,7 @@ namespace Lineas_de_Espera
         public ModeloUniServidor(ModeloMMS modeloMMS)
         {
             InitializeComponent();
+            inicializarTips();
             this.Text = "Modelo M/M/S";
             _modeloMMS = modeloMMS;
             lbl_lambda.Text = modeloMMS.tasaMediaTiempoLlegadaClientes.ToString();
@@ -85,8 +89,8 @@ namespace Lineas_de_Espera
             lbl_factorUtilizacion.Text = modeloMMS.factorUtilizacion.ToString();
             lbl_numeroEsperadoClientesSistema.Text = modeloMMS.numeroEsperadoClientesSistema.ToString();
             lbl_numeroEsperadoClientesFila.Text = modeloMMS.numeroEsperadoClientesFila.ToString();
-            lbl_tiempoEsperaSistema.Text = modeloMMS.numeroEsperadoClientesSistema.ToString();
-            lbl_tiempoEsperaCola.Text = modeloMMS.numeroEsperadoClientesFila.ToString();
+            lbl_tiempoEsperaSistema.Text = modeloMMS.tiempoEsperaEstimadoSistema.ToString();
+            lbl_tiempoEsperaCola.Text = modeloMMS.tiempoEsperaEstimadoFila.ToString();
             List<string> listaProbabilidades = modeloMMS.generarListaProbabilidadesClientes(
                 modeloMMS.tasaMediaTiempoLlegadaClientes,
                 modeloMMS.tasaMediaTiempoServicio,
@@ -97,6 +101,7 @@ namespace Lineas_de_Espera
         public ModeloUniServidor(ModeloMDS modeloMDS)
         {
             InitializeComponent();
+            inicializarTips();
             this.Text = "Modelo M/D/S";
             _modeloMDS = modeloMDS;
             lbl_lambda.Text = modeloMDS.tasaMediaTiempoLlegadaClientes.ToString();
@@ -221,7 +226,9 @@ namespace Lineas_de_Espera
 
             PWt = modelo.calcularProbabilidadTiempoEsperaSistemaExcedente(modelo.tasaMediaTiempoLlegadaClientes, modelo.tasaMediaTiempoServicio, 
                 modelo.factorUtilizacion, modelo.numeroServidores, tiempo);
+            PQwt = modelo.calcularProbabilidadTiempoEsperaFilaExcedente(modelo.tasaMediaTiempoLlegadaClientes, modelo.tasaMediaTiempoServicio, modelo.factorUtilizacion, modelo.numeroServidores, tiempo);
             lbl_wMayorT.Text = PWt.ToString();
+            lbl_wqMayorT.Text = PQwt.ToString();
         }
 
         private void calcularProbabilidadesTiempoExcedenteMDS(ModeloMDS modelo, float tiempo)
@@ -231,9 +238,81 @@ namespace Lineas_de_Espera
 
             PWt = modelo.calcularProbabilidadTiempoEsperaSistemaExcedente(modelo.tasaMediaTiempoLlegadaClientes, modelo.tasaMediaTiempoServicio,
                 modelo.factorUtilizacion, modelo.numeroServidores, tiempo);
+            PQwt = modelo.calcularProbabilidadTiempoEsperaFilaExcedente(modelo.tasaMediaTiempoLlegadaClientes, modelo.tasaMediaTiempoServicio, modelo.factorUtilizacion, modelo.numeroServidores, tiempo);
             lbl_wMayorT.Text = PWt.ToString();
+            lbl_wqMayorT.Text = PQwt.ToString();
+        }
+
+        private void inicializarTips()
+        {
+            tip_universal.SetToolTip(label1, "Factor de utilizacion es bla la bla y se mide en bla bla bla");
+            tip_universal.SetToolTip(label2, "Lambda es bla bla bla y se mide en bla bla bla");
+            tip_universal.SetToolTip(label3, "Mu es bla bla bla y se mide en bla bla bla");
+            tip_universal.SetToolTip(label4, "L es bla bla bla y se mide en bla bla bla");
+            tip_universal.SetToolTip(label5, "Lq es bla bla bla y se mide en bla bla bla");
+            tip_universal.SetToolTip(label6, "W es bla bla bla y se mide en bla bla bla");
+            tip_universal.SetToolTip(label7, "Wq es bla bla bla y se mide en bla bla bla");
+            tip_universal.SetToolTip(label8, "Numero de servidores es bla bla bla");
+            tip_universal.SetToolTip(label9, "Tiempo es bla bla bla");
+
         }
         #endregion
+
+
+        private void txt_costoServidor_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                float costoServidor = float.Parse(txt_costoServidor.Text);
+                if (costoServidor < 0) throw new ArgumentException("El costo por servidor debe ser positivo.");
+                int numeroServidores = int.Parse(lbl_numeroServidores.Text);
+                float costoServidores = ModeloLineaDeEspera.calcularCostoDeServidores(costoServidor, numeroServidores);
+                lbl_costoCalculadoServidores.Text = "$" + costoServidores.ToString();
+
+                float costoEspera = float.Parse(lbl_costoCalculadoEspera.Text.Trim('$'));
+                actualizarCostoTotal(costoServidores, costoEspera);
+
+            }
+            catch (FormatException)
+            {
+
+            }
+            catch (ArgumentException aEx)
+            {
+                txt_costoServidor.Clear();
+                MessageBox.Show(aEx.Message);
+            }
+        }
+
+        private void txt_costoEspera_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                float costoTiempo = float.Parse(txt_costoEspera.Text);
+                if (costoTiempo < 0) throw new ArgumentException("El costo por espera debe ser positivo.");
+                float numeroEsperadoClientesSistema = float.Parse(lbl_numeroEsperadoClientesSistema.Text);
+                float costoEspera = ModeloLineaDeEspera.calcularCostoDeTiempoEspera(costoTiempo, numeroEsperadoClientesSistema);
+                lbl_costoCalculadoEspera.Text = "$" + costoEspera.ToString();
+
+                float costoServidores = float.Parse(lbl_costoCalculadoServidores.Text.Trim('$'));
+                actualizarCostoTotal(costoServidores, costoEspera);
+            }
+            catch (FormatException)
+            {
+
+            }
+            catch (ArgumentException aEx)
+            {
+                txt_costoEspera.Clear();
+                MessageBox.Show(aEx.Message);
+            }
+        }
+
+        private void actualizarCostoTotal(float costoServidores, float costoTiempo)
+        {
+            float total = costoServidores + costoTiempo;
+            lbl_costoTotal.Text = "$" + total.ToString();
+        }
 
         
     }

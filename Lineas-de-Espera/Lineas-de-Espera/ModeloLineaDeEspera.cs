@@ -61,7 +61,6 @@ namespace Lineas_de_Espera
         }
         public float factorUtilizacion { get { return _factorUtilizacion; } set { _factorUtilizacion = value; } }
 
-
         /// <summary>
         /// Asigna factor de utilización cuando número de servidores es 1.
         /// </summary>
@@ -78,20 +77,9 @@ namespace Lineas_de_Espera
         {
             _factorUtilizacion = calcularFactorUtilizacion(tasaMediaTiempoLlegadaClientes, tasaMediaTiempoServicio, numeroServidores);
         }
-        
         #endregion
 
-        #region Global Methods
-        /// <summary>
-        /// Utilizado para las formulas de 1/lambda, 1/mu.
-        /// </summary>
-        /// <param name="valor">Valor a invertir (lambda o mu).</param>
-        /// <returns>Valor invertido</returns>
-        public float invertirValor(float valor)
-        {
-            return 1 / valor;
-        }
-
+        #region Private Methods
         /// <summary>
         /// Calcula factor de utilizacion para sistemas de un solo servidor
         /// </summary>
@@ -103,18 +91,94 @@ namespace Lineas_de_Espera
             return lambda / mu;
         }
 
-       /// <summary>
-       /// Calcula factor de utilizacion para sistemas de mas de un servidor
-       /// </summary>
-       /// <param name="lambda">tasaMediaTiempoLlegadaClientes</param>
-       /// <param name="mu">tasaMediaTiempoServicio</param>
-       /// <param name="numeroServidores">Numero de servidores que atienden el sistema.</param>
-       /// <returns></returns>
+        /// <summary>
+        /// Calcula factor de utilizacion para sistemas de mas de un servidor
+        /// </summary>
+        /// <param name="lambda">tasaMediaTiempoLlegadaClientes</param>
+        /// <param name="mu">tasaMediaTiempoServicio</param>
+        /// <param name="numeroServidores">Numero de servidores que atienden el sistema.</param>
+        /// <returns></returns>
         private float calcularFactorUtilizacion(float lambda, float mu, float numeroServidores)
         {
             return lambda / (numeroServidores * mu);
         }
 
+        /// <summary>
+        /// Calcula probabilidad de que haya menos clientes que servidores en el sistema.
+        /// </summary>
+        /// <param name="tasaMediaTiempoLlegadaClientes">lambda</param>
+        /// <param name="tasaMediaTiempoServicio">mu</param>
+        /// <param name="numeroClientes">Numero de clientes</param>
+        /// <param name="probabilidadCero">Probabilidad de que haya cero clientes</param>
+        /// <returns></returns>
+        private float calcularProbabilidadNMenorS(float tasaMediaTiempoLlegadaClientes, float tasaMediaTiempoServicio,
+            int numeroClientes, float probabilidadCero)
+        {
+            float factorialN = factorial(numeroClientes);
+            float probabilidad = (float)((Math.Pow(tasaMediaTiempoLlegadaClientes / tasaMediaTiempoServicio, numeroClientes) * probabilidadCero) /
+                factorialN);
+
+            return probabilidad;
+        }
+
+        /// <summary>
+        /// Calcula probabilidad de que haya mas clientes que servidores en el sistema.
+        /// </summary>
+        /// <param name="tasaMediaTiempoLlegadaClientes">lambda</param>
+        /// <param name="tasaMediaTiempoServicio">mu</param>
+        /// <param name="numeroClientes">N</param>
+        /// <param name="numeroServidores">S</param>
+        /// <param name="probabilidadCero">P0</param>
+        /// <returns></returns>
+        private float calcularProbabilidadNMayorS(float tasaMediaTiempoLlegadaClientes, float tasaMediaTiempoServicio,
+            int numeroClientes, int numeroServidores, float probabilidadCero)
+        {
+            float factorialS = factorial(numeroServidores);
+            float probabilidad = (float)((Math.Pow(tasaMediaTiempoLlegadaClientes / tasaMediaTiempoServicio, numeroClientes) * probabilidadCero) /
+                (factorialS * Math.Pow(numeroServidores, numeroClientes - numeroServidores)));
+            return probabilidad;
+        }
+
+        /// <summary>
+        /// Calcula el divisor de la ecuacion de P0 para modelo de varios servidores.
+        /// </summary>
+        /// <returns>Sumatoria del divisor</returns>
+        private float calcularSumatoriaDivisoraProbabilidadCero(float tasaMediaTiempoLlegadaClientes, float tasaMediaTiempoServicio, int numeroServidores)
+        {
+            float sumatoria = 0;
+            float factorialS = factorial(numeroServidores);
+            for (int n = 0; n < numeroServidores; n++)
+            {
+                float monomio1 = (float)Math.Pow(tasaMediaTiempoLlegadaClientes / tasaMediaTiempoServicio, n) / factorial(n);
+                sumatoria += monomio1;
+            }
+            float monomio2 = (float)Math.Pow(tasaMediaTiempoLlegadaClientes / tasaMediaTiempoServicio, numeroServidores) / factorialS;
+            float monomio3 = (float)1 / (1 - tasaMediaTiempoLlegadaClientes / (numeroServidores * tasaMediaTiempoServicio));
+            float resultado = sumatoria + monomio2 * monomio3;
+            return resultado;
+        }
+        
+        private float calcularProbabilidadNoFila(float tasaMediaTiempoLlegadaClientes, float tasaMediaTiempoServicio, int numeroServidores)
+        {
+            float resultado = 0;
+            for (int i = 0; i < numeroServidores; i++)
+            {
+                resultado += calcularProbabilidadNClientesSistema(tasaMediaTiempoLlegadaClientes, tasaMediaTiempoServicio, i, numeroServidores);
+            }
+            return resultado;
+        }
+        #endregion
+
+        #region Global Methods
+        /// <summary>
+        /// Utilizado para las formulas de 1/lambda, 1/mu.
+        /// </summary>
+        /// <param name="valor">Valor a invertir (lambda o mu).</param>
+        /// <returns>Valor invertido</returns>
+        public float invertirValor(float valor)
+        {
+            return 1 / valor;
+        }    
 
         public float calcularProbabilidadTiempoEsperaSistemaExcedente(float tasaMediaTiempoServicio, float factorUtilizacion, 
             float tiempo)
@@ -228,61 +292,6 @@ namespace Lineas_de_Espera
         }
 
         /// <summary>
-        /// Calcula probabilidad de que haya menos clientes que servidores en el sistema.
-        /// </summary>
-        /// <param name="tasaMediaTiempoLlegadaClientes">lambda</param>
-        /// <param name="tasaMediaTiempoServicio">mu</param>
-        /// <param name="numeroClientes">Numero de clientes</param>
-        /// <param name="probabilidadCero">Probabilidad de que haya cero clientes</param>
-        /// <returns></returns>
-        private float calcularProbabilidadNMenorS(float tasaMediaTiempoLlegadaClientes, float tasaMediaTiempoServicio, 
-            int numeroClientes, float probabilidadCero)
-        {
-            float factorialN = factorial(numeroClientes);
-            float probabilidad = (float) ((Math.Pow(tasaMediaTiempoLlegadaClientes / tasaMediaTiempoServicio, numeroClientes) * probabilidadCero) / 
-                factorialN);
-
-            return probabilidad;
-        }
-
-        /// <summary>
-        /// Calcula probabilidad de que haya mas clientes que servidores en el sistema.
-        /// </summary>
-        /// <param name="tasaMediaTiempoLlegadaClientes">lambda</param>
-        /// <param name="tasaMediaTiempoServicio">mu</param>
-        /// <param name="numeroClientes">N</param>
-        /// <param name="numeroServidores">S</param>
-        /// <param name="probabilidadCero">P0</param>
-        /// <returns></returns>
-        private float calcularProbabilidadNMayorS(float tasaMediaTiempoLlegadaClientes, float tasaMediaTiempoServicio, 
-            int numeroClientes, int numeroServidores, float probabilidadCero)
-        {
-            float factorialS = factorial(numeroServidores);
-            float probabilidad = (float) ((Math.Pow(tasaMediaTiempoLlegadaClientes / tasaMediaTiempoServicio, numeroClientes) * probabilidadCero) /
-                (factorialS * Math.Pow(numeroServidores, numeroClientes - numeroServidores)));
-            return probabilidad;
-        }
-
-        /// <summary>
-        /// Calcula el divisor de la ecuacion de P0 para modelo de varios servidores.
-        /// </summary>
-        /// <returns>Sumatoria del divisor</returns>
-        private float calcularSumatoriaDivisoraProbabilidadCero(float tasaMediaTiempoLlegadaClientes, float tasaMediaTiempoServicio, int numeroServidores)
-        {
-            float sumatoria = 0;
-            float factorialS = factorial(numeroServidores);
-            for (int n = 0; n < numeroServidores; n++)
-            {
-                float monomio1 = (float)Math.Pow(tasaMediaTiempoLlegadaClientes / tasaMediaTiempoServicio, n) / factorial(n);
-                sumatoria += monomio1;
-            }
-            float monomio2 = (float)Math.Pow(tasaMediaTiempoLlegadaClientes / tasaMediaTiempoServicio, numeroServidores) / factorialS;
-            float monomio3 = (float)1 / (1 - tasaMediaTiempoLlegadaClientes / (numeroServidores * tasaMediaTiempoServicio));
-            float resultado = sumatoria + monomio2 * monomio3;
-            return resultado;
-        }
-
-        /// <summary>
         /// Calcula el factorial de un numero entero.
         /// </summary>
         /// <param name="numero">Numero al cual se calcula el factorial.</param>
@@ -293,6 +302,28 @@ namespace Lineas_de_Espera
             return numero * factorial(numero - 1);
         }
 
+        public float calcularProbabilidadTiempoEsperaFilaExcedente(float tasaMediaTiempoLlegadaCLientes, float tasaMediaTiempoServicio, 
+            float factorUtilizacion, int numeroServidores, float tiempo)
+        {
+            float probabilidadNoFila = calcularProbabilidadNoFila(tasaMediaTiempoLlegadaCLientes, tasaMediaTiempoServicio, numeroServidores);
+            float resultado = (float) ((1 - probabilidadNoFila) * Math.Exp(-numeroServidores * tasaMediaTiempoServicio * (1 - factorUtilizacion) * tiempo));
+            return resultado;
+        }
+
+        public static float calcularCostoDeServidores(float costoServidor, int numeroServidores)
+        {
+            return costoServidor * numeroServidores;
+        }
+
+        public static float calcularCostoDeTiempoEspera(float costoTiempo, float numeroEsperadoClientesSistema)
+        {
+            return costoTiempo * numeroEsperadoClientesSistema;
+        }
+
+        public static float calcularCostoTotal(float costoServidor, float costoTiempoEspera)
+        {
+             return costoServidor + costoTiempoEspera;
+        }
         #endregion
 
     }

@@ -157,7 +157,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cbx_listaModelos);
             this.Name = "Inicio";
-            this.Text = "Form1";
+            this.Text = "Modelos de Lineas de Espera";
             this.ResumeLayout(false);
             this.PerformLayout();
 
